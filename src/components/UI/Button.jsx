@@ -1,0 +1,20 @@
+import React from 'react';
+
+const Button = ({ children, variant = 'primary', className = '', ...props }) => {
+  const variants = {
+    primary: 'bg-white text-blue-600 border border-blue-100 hover:bg-blue-50 hover:border-blue-300',
+    secondary: 'bg-transparent text-blue-600 border border-transparent hover:bg-blue-50',
+    danger: 'bg-white text-red-600 border border-red-100 hover:bg-red-50 hover:border-red-300'
+  };
+
+  return (
+    <button
+      className={`px-4 py-2 rounded-lg font-normal shadow-none transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200 ${variants[variant]} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;
