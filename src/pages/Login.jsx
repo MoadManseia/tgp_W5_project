@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
+import { BoltIcon } from '@heroicons/react/24/solid';
 import Button from '../components/UI/Button';
 
 const Login = ({ onLogin }) => {
@@ -10,6 +10,7 @@ const Login = ({ onLogin }) => {
     password: '',
   });
   const [error, setError] = useState('');
+  const [focusedField, setFocusedField] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,8 +44,8 @@ const Login = ({ onLogin }) => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4" style={{fontFamily: 'Roboto, Arial, sans-serif'}}>
       <div className="bg-white w-full max-w-sm p-6 rounded-lg shadow border border-blue-100">
         <div className="flex flex-col items-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-3">
-            <ChatBubbleLeftRightIcon className="w-6 h-6 text-blue-500" />
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-3 shadow-lg">
+            <BoltIcon className="w-7 h-7 text-white" />
           </div>
           <h1 className="text-xl font-normal text-gray-800">LiveChat</h1>
           <p className="text-gray-400 text-sm mt-1">Sign in to your account</p>
@@ -61,7 +62,11 @@ const Login = ({ onLogin }) => {
               type="email"
               value={credentials.email}
               onChange={(e) => setCredentials({...credentials, email: e.target.value})}
-              className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:ring-1 focus:ring-blue-500 focus:outline-none bg-gray-50"
+              onFocus={() => setFocusedField('email')}
+              onBlur={() => setFocusedField(null)}
+              className={`w-full px-3 py-2 border border-gray-200 rounded text-sm text-gray-900 placeholder:text-gray-300 focus:ring-1 focus:ring-blue-500 focus:outline-none ${
+                credentials.email && focusedField !== 'email' ? 'bg-gray-100' : 'bg-white'
+              }`}
               placeholder="Enter your email"
             />
           </div>
@@ -71,7 +76,11 @@ const Login = ({ onLogin }) => {
               type="password"
               value={credentials.password}
               onChange={(e) => setCredentials({...credentials, password: e.target.value})}
-              className="w-full px-3 py-2 border border-gray-200 rounded text-sm focus:ring-1 focus:ring-blue-500 focus:outline-none bg-gray-50"
+              onFocus={() => setFocusedField('password')}
+              onBlur={() => setFocusedField(null)}
+              className={`w-full px-3 py-2 border border-gray-200 rounded text-sm text-gray-900 placeholder:text-gray-100 focus:ring-1 focus:ring-blue-500 focus:outline-none ${
+                credentials.password && focusedField !== 'password' ? 'bg-gray-100' : 'bg-white'
+              }`}
               placeholder="Enter your password"
             />
           </div>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Layout/Sidebar';
-import ChatList from '../components/Chat/ChatList';
 import ChatHeader from '../components/Chat/ChatHeader';
 import ChatWindow from '../components/Chat/ChatWindow';
 import MessageInput from '../components/Chat/MessageInput';
@@ -8,11 +7,11 @@ import SettingsPage from './Settings';
 
 // Mock data
 const mockChats = [
-  { id: 1, name: 'Support Team', lastMessage: 'How can I help you?', unread: 2 },
-  { id: 2, name: 'John Smith', lastMessage: 'Meeting tomorrow at 3 PM', unread: 0 },
-  { id: 3, name: 'Sarah Johnson', lastMessage: 'Thanks for your help!', unread: 1 },
-  { id: 4, name: 'Tech Support', lastMessage: 'Your issue has been resolved', unread: 0 },
-  { id: 5, name: 'Marketing Team', lastMessage: 'New campaign launch', unread: 3 },
+  { id: 1, name: 'Support Team', lastMessage: 'How can I help you?', unread: 2, profilePic: 'https://ui-avatars.com/api/?name=Support+Team' },
+  { id: 2, name: 'John Smith', lastMessage: 'Meeting tomorrow at 3 PM', unread: 0, profilePic: 'https://ui-avatars.com/api/?name=John+Smith' },
+  { id: 3, name: 'Sarah Johnson', lastMessage: 'Thanks for your help!', unread: 1, profilePic: 'https://ui-avatars.com/api/?name=Sarah+Johnson' },
+  { id: 4, name: 'Tech Support', lastMessage: 'Your issue has been resolved', unread: 0, profilePic: 'https://ui-avatars.com/api/?name=Tech+Support' },
+  { id: 5, name: 'Marketing Team', lastMessage: 'New campaign launch', unread: 3, profilePic: 'https://ui-avatars.com/api/?name=Marketing+Team' },
 ];
 
 const mockMessages = [
@@ -91,33 +90,16 @@ const Dashboard = ({ user, onLogout }) => {
       case 'dashboard':
       default:
         return (
-
-          // <div className="flex-1 flex flex-col md:flex-row">
-          // {/* Chat List - Hidden on mobile when chat is open, shown on desktop */}
-          // <div className={`${activeChat ? 'hidden md:block' : 'block'} w-full md:w-80`}>
-
-<div className="flex-1 flex flex-col md:flex-row h-full">
-            {/* Chat List */}
-            <div className="w-full md:w-80 max-w-full md:max-w-xs border-r border-gray-200 bg-white overflow-y-auto">
-              <ChatList 
-                chats={chats} 
-                activeChat={activeChat} 
-                onSelectChat={setActiveChat} 
-              />
-            </div>
-        {/* Chat Area - Show back button on mobile
-        <div className="flex-1 flex flex-col"> */}
+          <div className="flex flex-col flex-1 h-full">
 
 
 
 
 
             {/* Chat Area */}
-            <div className="flex flex-col flex-1 h-full">
-              <ChatHeader chat={activeChat} />
-              <ChatWindow messages={messages} currentUser={user} />
-              <MessageInput onSendMessage={handleSendMessage} />
-            </div>
+            <ChatHeader chat={activeChat} />
+            <ChatWindow messages={messages} currentUser={user} />
+            <MessageInput onSendMessage={handleSendMessage} />
           </div>
         );
     }
@@ -130,6 +112,9 @@ const Dashboard = ({ user, onLogout }) => {
         onLogout={onLogout} 
         currentView={currentView}
         onViewChange={setCurrentView}
+        chats={chats}
+        activeChat={activeChat}
+        onSelectChat={setActiveChat}
       />
 
       {/* Main Content */}

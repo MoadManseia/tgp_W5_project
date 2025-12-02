@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { UserIcon, BellIcon, MoonIcon, SunIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 const SettingsPage = ({ user }) => {
+  const [profile, setProfile] = useState({
+    name: user?.name || '',
+    email: user?.email || ''
+  });
+  const [focusedField, setFocusedField] = useState(null);
   const [settings, setSettings] = useState({
     notifications: true,
     sound: true,
@@ -17,12 +22,18 @@ const SettingsPage = ({ user }) => {
   };
 
   return (
-    <div className="p-6 bg-white">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
+    <div className="flex-1 flex flex-col bg-gray-50 h-full overflow-hidden">
+      {/* Fixed Header */}
+      <div className="flex-shrink-0 bg-gray-50 border-b border-gray-200 px-6 py-4 z-10">
+        <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">Settings</h1>
           <p className="text-gray-600">Manage your account preferences and settings</p>
         </div>
+      </div>
+      
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="p-6 max-w-4xl mx-auto">
 
         {/* Profile Section */}
         <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
@@ -36,8 +47,13 @@ const SettingsPage = ({ user }) => {
               <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
               <input
                 type="text"
-                defaultValue={user?.name || ''}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                value={profile.name}
+                onChange={(e) => setProfile({...profile, name: e.target.value})}
+                onFocus={() => setFocusedField('name')}
+                onBlur={() => setFocusedField(null)}
+                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                  profile.name ? 'bg-gray-100' : 'bg-white'
+                } ${focusedField === 'name' ? 'text-gray-900' : 'text-gray-400'}`}
                 placeholder="Your name"
               />
             </div>
@@ -46,8 +62,13 @@ const SettingsPage = ({ user }) => {
               <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
               <input
                 type="email"
-                defaultValue={user?.email || ''}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                value={profile.email}
+                onChange={(e) => setProfile({...profile, email: e.target.value})}
+                onFocus={() => setFocusedField('email')}
+                onBlur={() => setFocusedField(null)}
+                className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                  profile.email ? 'bg-gray-100' : 'bg-white'
+                } ${focusedField === 'email' ? 'text-gray-900' : 'text-gray-400'}`}
                 placeholder="your@email.com"
               />
             </div>
@@ -115,7 +136,7 @@ const SettingsPage = ({ user }) => {
             </div>
           </div>
         </div>
-
+        </div>
       </div>
     </div>
   );

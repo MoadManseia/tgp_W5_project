@@ -19,9 +19,9 @@ const MessageBubble = ({ message, isOwn }) => {
           <div className="text-[11px] text-gray-400 mb-1 ml-1">{new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
         )}
         <div
-          className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2 border transition-all duration-75 ${isOwn
-            ? 'bg-blue-100 border-blue-100 text-blue-900 rounded-br-4 shadow-sm'
-            : 'bg-white border-gray-200 text-gray-800 rounded-bl-2'
+          className={`max-w-xs lg:max-w-md px-4 py-2 rounded-[3px] border transition-all duration-75 ${isOwn
+            ? 'bg-blue-100 border-blue-100 text-blue-900 shadow-sm'
+            : 'bg-white border-gray-200 text-gray-800'
             }`}
         >
           <p className="text-sm leading-relaxed whitespace-pre-line">{message.content}</p>
