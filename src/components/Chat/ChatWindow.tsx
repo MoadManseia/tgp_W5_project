@@ -24,14 +24,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
           {messages.map((message, index) => {
             const isOwn = message.senderId === currentUser.id;
             return (
-              <MessageBubble
-                key={index}
-                message={message}
-                isOwn={isOwn}
-                senderProfilePic={
-                  !isOwn && chatUser ? chatUser.profilePic : undefined
-                }
-              />
+              <MessageBubble key={index} message={message} isOwn={isOwn} />
             );
           })}
         </div>

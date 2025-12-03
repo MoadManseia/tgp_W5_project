@@ -1,18 +1,12 @@
 import React from "react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import type { Chat } from "../../pages/Dashboard";
 
 type ChatHeaderProps = {
   chat: Chat | null;
-  lastMessage?: string;
   onHeaderClick?: () => void;
 };
 
-const ChatHeader: React.FC<ChatHeaderProps> = ({
-  chat,
-  lastMessage,
-  onHeaderClick,
-}) => {
+const ChatHeader: React.FC<ChatHeaderProps> = ({ chat, onHeaderClick }) => {
   return (
     <div
       className="px-6 py-4 border-b border-blue-50 bg-white flex items-center justify-between cursor-pointer hover:bg-blue-50 transition-colors"
