@@ -49,10 +49,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4" style={{fontFamily: 'Roboto, Arial, sans-serif'}}>
       <div className="bg-white w-full max-w-sm p-6 rounded-lg shadow border border-blue-100">
         <div className="flex flex-col items-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-3 shadow-lg">
-            <BoltIcon className="w-7 h-7 text-white" />
-          </div>
-          <h1 className="text-xl font-normal text-gray-800">LiveChat</h1>
+        
+          <h1 className="text-xl font-normal text-gray-800 mb-3">Co.Chat</h1>
           <p className="text-gray-400 text-sm mt-1">Sign in to your account</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -90,22 +88,13 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <label className="flex items-center">
-              <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-              <span className="ml-2 text-xs text-gray-400">Remember me</span>
-            </label>
-            <a href="#" className="text-xs text-blue-500 hover:text-blue-700">Forgot password?</a>
+           
           </div>
-          <Button type="submit" className="w-full" variant="primary">
+          <Button type="submit" className="w-full mt-2" variant="primary">
             Sign In
           </Button>
         </form>
-        <div className="mt-4 text-center">
-          <p className="text-xs text-gray-400">
-            Don't have an account?{' '}
-            <a href="#" className="text-blue-500 hover:text-blue-700 font-medium">Sign up</a>
-          </p>
-        </div>
+    
       </div>
     </div>
   );

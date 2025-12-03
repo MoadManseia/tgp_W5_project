@@ -86,16 +86,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                 <input
                   type="text"
                   value={profile.name}
-                  onChange={(e) =>
-                    setProfile({ ...profile, name: e.target.value })
-                  }
-                  onFocus={() => setFocusedField("name")}
-                  onBlur={() => setFocusedField(null)}
-                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    profile.name ? "bg-gray-100" : "bg-white"
-                  } ${
-                    focusedField === "name" ? "text-gray-900" : "text-gray-400"
-                  }`}
+                  readOnly
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-700 cursor-not-allowed"
                   placeholder="Your name"
                 />
               </div>
@@ -107,16 +99,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                 <input
                   type="email"
                   value={profile.email}
-                  onChange={(e) =>
-                    setProfile({ ...profile, email: e.target.value })
-                  }
-                  onFocus={() => setFocusedField("email")}
-                  onBlur={() => setFocusedField(null)}
-                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    profile.email ? "bg-gray-100" : "bg-white"
-                  } ${
-                    focusedField === "email" ? "text-gray-900" : "text-gray-400"
-                  }`}
+                  readOnly
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-700 cursor-not-allowed"
                   placeholder="your@email.com"
                 />
               </div>
