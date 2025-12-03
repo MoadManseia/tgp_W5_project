@@ -14,10 +14,8 @@ const ChatList: React.FC<ChatListProps> = ({
   onSelectChat,
 }) => {
   return (
-    <div className="w-full overflow-y-auto">
-      <div className="p-4 border-b border-gray-700 mb-2">
-        <h2 className="text-lg font-semibold text-white">Conversations</h2>
-      </div>
+    <div className="w-full overflow-y-auto overflow-x-hidden">
+     
       <div className="space-y-1">
         {chats.map((chat) => (
           <button

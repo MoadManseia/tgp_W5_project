@@ -26,39 +26,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   }[] = [{ icon: HomeIcon, label: "Dashboard", view: "dashboard" }];
 
   return (
-    <div className="h-full w-16 md:w-64 bg-gray-800 text-white flex flex-col sticky top-0">
-      <div className="p-6 border-b border-gray-700">
-        {currentView === "dashboard" ? (
-          <>
-            <div className="hidden md:flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                <BoltIcon className="w-5 h-5 text-white" />
-              </div>
-              <h1 className="text-xl font-bold">Live Chat</h1>
-              <h1 className="text-xl font-bold bg-[red]">Live Chat</h1>
-            </div>
-            <div className="md:hidden flex justify-center">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                <BoltIcon className="w-5 h-5 text-white" />
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="hidden md:flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                <BoltIcon className="w-5 h-5 text-white" />
-              </div>
-              <h1 className="text-xl font-bold">LiveChat</h1>
-            </div>
-            <div className="md:hidden flex justify-center">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                <BoltIcon className="w-5 h-5 text-white" />
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+    <div className="h-full w-24 md:w-64 bg-gray-800 text-white flex flex-col sticky top-0">
+    
 
       <nav className="flex-1 overflow-y-auto p-4">
         {/* Show Dashboard button only when not on dashboard view */}
@@ -103,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             }`}
           >
             <Cog6ToothIcon className="w-5 h-5" />
-            <span className="hidden md:inline">Settings</span>
+            <span className="md:inline hidden ">Settings</span>
           </button>
         </div>
       </div>

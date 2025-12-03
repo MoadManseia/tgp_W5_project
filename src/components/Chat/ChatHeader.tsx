@@ -4,23 +4,28 @@ import type { Chat } from "../../pages/Dashboard";
 
 type ChatHeaderProps = {
   chat: Chat | null;
+  lastMessage?: string;
+  onHeaderClick?: () => void;
 };
 
-const ChatHeader: React.FC<ChatHeaderProps> = ({ chat }) => {
+const ChatHeader: React.FC<ChatHeaderProps> = ({ chat, lastMessage, onHeaderClick }) => {
   return (
     <div
-      className="px-6 py-4 border-b border-blue-50 bg-white flex items-center justify-between"
+      className="px-6 py-4 border-b border-blue-50 bg-white flex items-center justify-between cursor-pointer hover:bg-blue-50 transition-colors"
       style={{ fontFamily: "Roboto, Arial, sans-serif" }}
+      onClick={onHeaderClick}
     >
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
           <span className="font-medium text-blue-600 text-base">
-            {chat?.name?.charAt(0)}
+            {chat?.name ? chat.name.split(' ').map(part => part[0]).join('') : ''}
           </span>
         </div>
         <div>
           <h2 className="font-normal text-gray-800 text-base">{chat?.name}</h2>
-          <p className="text-xs text-blue-400 font-normal mt-0.5">Online</p>
+          <p className="text-xs text-gray-500 font-normal mt-0.5">
+            Last Active: {chat?.lastActiveMinutes ?? 12} minutes ago
+          </p>
         </div>
       </div>
       <button className="p-2 hover:bg-blue-50 rounded-lg transition-colors">

@@ -64,38 +64,120 @@ const mockChats: Chat[] = [
   },
 ];
 
-const mockMessages: Message[] = [
-  {
-    id: 1,
-    content: "Hello! How can I help you today?",
-    senderId: 2,
-    timestamp: new Date(Date.now() - 3600000),
-  },
-  {
-    id: 2,
-    content: "I need help with my account settings",
-    senderId: 1,
-    timestamp: new Date(Date.now() - 1800000),
-  },
-  {
-    id: 3,
-    content: "Sure, I can help with that. What seems to be the issue?",
-    senderId: 2,
-    timestamp: new Date(Date.now() - 900000),
-  },
-  {
-    id: 4,
-    content: "I cannot find the privacy settings",
-    senderId: 1,
-    timestamp: new Date(Date.now() - 600000),
-  },
-  {
-    id: 5,
-    content: "Go to Settings > Privacy to adjust your preferences",
-    senderId: 2,
-    timestamp: new Date(Date.now() - 300000),
-  },
-];
+// Initialize messages for each chat
+// Use offset to avoid conflicts between user.id and chat.id
+// Chat participants use chatId + 1000 as senderId
+const getChatParticipantId = (chatId: number): number => chatId + 1000;
+
+const initializeMessages = (userId: number): Map<number, Message[]> => {
+  const messagesMap = new Map<number, Message[]>();
+  
+  // Messages for Support Team (chat id: 1)
+  messagesMap.set(1, [
+    {
+      id: 1,
+      content: "Hello! How can I help you today?",
+      senderId: getChatParticipantId(1), // Support Team (1001)
+      timestamp: new Date(Date.now() - 3600000),
+    },
+    {
+      id: 2,
+      content: "I need help with my account settings",
+      senderId: userId, // Current user
+      timestamp: new Date(Date.now() - 1800000),
+    },
+    {
+      id: 3,
+      content: "Sure, I can help with that. What seems to be the issue?",
+      senderId: getChatParticipantId(1),
+      timestamp: new Date(Date.now() - 900000),
+    },
+  ]);
+
+  // Messages for John Smith (chat id: 2)
+  messagesMap.set(2, [
+    {
+      id: 4,
+      content: "Hi, are we still meeting tomorrow?",
+      senderId: getChatParticipantId(2), // John Smith (1002)
+      timestamp: new Date(Date.now() - 7200000),
+    },
+    {
+      id: 5,
+      content: "Yes, meeting tomorrow at 3 PM",
+      senderId: userId,
+      timestamp: new Date(Date.now() - 3600000),
+    },
+    {
+      id: 6,
+      content: "Perfect! See you then.",
+      senderId: getChatParticipantId(2),
+      timestamp: new Date(Date.now() - 1800000),
+    },
+  ]);
+
+  // Messages for Sarah Johnson (chat id: 3)
+  messagesMap.set(3, [
+    {
+      id: 7,
+      content: "Thank you so much for your help!",
+      senderId: getChatParticipantId(3), // Sarah Johnson (1003)
+      timestamp: new Date(Date.now() - 5400000),
+    },
+    {
+      id: 8,
+      content: "You're welcome! Happy to help.",
+      senderId: userId,
+      timestamp: new Date(Date.now() - 3600000),
+    },
+    {
+      id: 9,
+      content: "Thanks for your help!",
+      senderId: getChatParticipantId(3),
+      timestamp: new Date(Date.now() - 1800000),
+    },
+  ]);
+
+  // Messages for Tech Support (chat id: 4)
+  messagesMap.set(4, [
+    {
+      id: 10,
+      content: "Your issue has been resolved",
+      senderId: getChatParticipantId(4), // Tech Support (1004)
+      timestamp: new Date(Date.now() - 7200000),
+    },
+    {
+      id: 11,
+      content: "Great! Thank you for the quick response.",
+      senderId: userId,
+      timestamp: new Date(Date.now() - 3600000),
+    },
+  ]);
+
+  // Messages for Marketing Team (chat id: 5)
+  messagesMap.set(5, [
+    {
+      id: 12,
+      content: "New campaign launch next week",
+      senderId: getChatParticipantId(5), // Marketing Team (1005)
+      timestamp: new Date(Date.now() - 10800000),
+    },
+    {
+      id: 13,
+      content: "Exciting! What's the theme?",
+      senderId: userId,
+      timestamp: new Date(Date.now() - 7200000),
+    },
+    {
+      id: 14,
+      content: "New campaign launch",
+      senderId: getChatParticipantId(5),
+      timestamp: new Date(Date.now() - 3600000),
+    },
+  ]);
+
+  return messagesMap;
+};
 
 type DashboardProps = {
   user: AppUser;
@@ -103,38 +185,85 @@ type DashboardProps = {
 };
 
 const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
-  const [chats] = useState<Chat[]>(mockChats);
+  const [chats, setChats] = useState<Chat[]>(mockChats);
   const [activeChat, setActiveChat] = useState<Chat | null>(null);
-  const [messages, setMessages] = useState<Message[]>(mockMessages);
+  const [messagesMap, setMessagesMap] = useState<Map<number, Message[]>>(
+    () => initializeMessages(user.id)
+  );
   const [currentView, setCurrentView] = useState<"dashboard" | "settings">(
     "dashboard"
   );
+  const [showProfileDetails, setShowProfileDetails] = useState(false);
 
+  // On mount or whenever messagesMap changes, update chats to reflect the actual latest message
   useEffect(() => {
-    // In a real app, you would fetch messages for the active chat here
-    // For now, we're using mock data
-  }, [activeChat]);
+    setChats(prevChats => prevChats.map(chat => {
+      const msgs = messagesMap.get(chat.id) || [];
+      const last = msgs.length > 0 ? msgs[msgs.length-1].content : chat.lastMessage;
+      return { ...chat, lastMessage: last };
+    }));
+  }, [messagesMap, user]);
+
+  // Get messages for the active chat
+  const getActiveChatMessages = (): Message[] => {
+    if (!activeChat) return [];
+    return messagesMap.get(activeChat.id) || [];
+  };
 
   const handleSendMessage = (content: string) => {
-    const newMessage = {
-      id: messages.length + 1,
+    if (!activeChat) return;
+
+    const chatMessages = messagesMap.get(activeChat.id) || [];
+    const newMessageId = Math.max(...chatMessages.map((m) => m.id), 0) + 1;
+
+    const newMessage: Message = {
+      id: newMessageId,
       content,
       senderId: user.id,
       timestamp: new Date(),
     };
 
-    // Add user's message
-    setMessages([...messages, newMessage]);
+    // Add user's message to the specific chat
+    const updatedMessages = [...chatMessages, newMessage];
+    setMessagesMap((prev) => {
+      const newMap = new Map(prev);
+      newMap.set(activeChat.id, updatedMessages);
+      return newMap;
+    });
+
+    // Update chat's last message
+    setChats((prevChats) =>
+      prevChats.map((chat) =>
+        chat.id === activeChat.id
+          ? { ...chat, lastMessage: content }
+          : chat
+      )
+    );
 
     // Auto-response after a short delay (simulating typing)
     setTimeout(() => {
-      const botResponse = {
-        id: messages.length + 2,
+      const botResponse: Message = {
+        id: newMessageId + 1,
         content: getBotResponse(content),
-        senderId: 2, // Bot user ID
+        senderId: getChatParticipantId(activeChat.id), // Use chat participant ID for bot responses
         timestamp: new Date(),
       };
-      setMessages((prev) => [...prev, botResponse]);
+
+      const finalMessages = [...updatedMessages, botResponse];
+      setMessagesMap((prev) => {
+        const newMap = new Map(prev);
+        newMap.set(activeChat.id, finalMessages);
+        return newMap;
+      });
+
+      // Update chat's last message with bot response
+      setChats((prevChats) =>
+        prevChats.map((chat) =>
+          chat.id === activeChat.id
+            ? { ...chat, lastMessage: botResponse.content }
+            : chat
+        )
+      );
     }, 1000);
   };
 
@@ -186,16 +315,13 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
           return (
             <div className="flex flex-1 h-full items-center justify-center bg-white">
               <div className="text-center max-w-md px-4">
-                <p className="text-sm font-medium text-blue-600 mb-2">
+                <p className="text-lg font-medium text-blue-600 mb-2">
                   Welcome back, {user.name}
                 </p>
                 <h2 className="text-2xl font-semibold text-gray-900 mb-3">
                   Select a conversation to get started
                 </h2>
-                <p className="text-sm text-gray-500">
-                  Choose a chat from the sidebar to view messages and continue
-                  your conversation.
-                </p>
+           
               </div>
             </div>
           );
@@ -205,16 +331,24 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
           <div className="flex flex-1 h-full">
             {/* Chat Area */}
             <div className="flex flex-col flex-1 h-full">
-              <ChatHeader chat={activeChat} />
+              <ChatHeader chat={activeChat} lastMessage={(() => {
+                const msgs = getActiveChatMessages();
+                return msgs.length > 0 ? msgs[msgs.length-1].content : '';
+              })()} onHeaderClick={() => setShowProfileDetails(true)} />
               <ChatWindow
-                messages={messages}
+                messages={getActiveChatMessages()}
                 currentUser={user}
                 chatUser={activeChat}
               />
               <MessageInput onSendMessage={handleSendMessage} />
             </div>
             {/* Profile Details Sidebar for active chat */}
-            <ProfileDetails chat={activeChat} />
+            {showProfileDetails && (
+              <ProfileDetails
+                chat={activeChat}
+                onClose={() => setShowProfileDetails(false)}
+              />
+            )}
           </div>
         );
     }
