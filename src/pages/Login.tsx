@@ -1,42 +1,47 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { BoltIcon } from '@heroicons/react/24/solid';
-import Button from '../components/UI/Button';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { BoltIcon } from "@heroicons/react/24/solid";
+import Button from "../components/UI/Button";
+import type { AppUser } from "../App";
 
-const Login = ({ onLogin }) => {
+type LoginProps = {
+  onLogin: (user: AppUser) => void;
+};
+
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({
-    email: '',
-    password: '',
-  });
-  const [error, setError] = useState('');
-  const [focusedField, setFocusedField] = useState(null);
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [focusedField, setFocusedField] = useState<"email" | "password" | null>(
+    null
+  );
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // Simple validation
     if (!credentials.email || !credentials.password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
     
     // Mock authentication
-    const mockUsers = [
-      { email: 'md@yaho.com', password: '123456', id: 1, name: 'Moad' },
-      { email: 'hk@yaho.com', password: 'test123', id: 2, name: 'dr.Hakeem' },
+    const mockUsers: (Required<AppUser> & { password: string })[] = [
+      { email: "md@yaho.com", password: "123456", id: 1, name: "Moad" },
+      { email: "hk@yaho.com", password: "test123", id: 2, name: "dr.Hakeem" },
     ];
     
     const user = mockUsers.find(
-      u => u.email === credentials.email && u.password === credentials.password
+      (u) =>
+        u.email === credentials.email && u.password === credentials.password
     );
     
     if (user) {
       const { password, ...userWithoutPassword } = user;
       onLogin(userWithoutPassword);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } else {
-      setError('Invalid credentials');
+      setError("Invalid credentials");
     }
   };
 

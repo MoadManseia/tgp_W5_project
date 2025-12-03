@@ -1,7 +1,18 @@
-import React from 'react';
-import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
+import React from "react";
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
+import type { Chat } from "../../pages/Dashboard";
 
-const ChatList = ({ chats, activeChat, onSelectChat }) => {
+type ChatListProps = {
+  chats: Chat[];
+  activeChat: Chat;
+  onSelectChat: (chat: Chat) => void;
+};
+
+const ChatList: React.FC<ChatListProps> = ({
+  chats,
+  activeChat,
+  onSelectChat,
+}) => {
   return (
     <div className="w-full overflow-y-auto">
       <div className="p-4 border-b border-gray-700 mb-2">

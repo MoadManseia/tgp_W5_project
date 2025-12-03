@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import React, { useState } from "react";
+import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 
-const MessageInput = ({ onSendMessage }) => {
-  const [message, setMessage] = useState('');
+type MessageInputProps = {
+  onSendMessage: (content: string) => void;
+};
 
-  const handleSubmit = (e) => {
+const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (message.trim()) {
       onSendMessage(message);
@@ -13,7 +17,10 @@ const MessageInput = ({ onSendMessage }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-white border-t border-gray-200">
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 bg-white border-t border-gray-200"
+    >
       <div className="flex gap-2">
         <input
           type="text"

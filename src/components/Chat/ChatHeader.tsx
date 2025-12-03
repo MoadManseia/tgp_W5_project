@@ -1,9 +1,17 @@
-import React from 'react';
-import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
+import React from "react";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+import type { Chat } from "../../pages/Dashboard";
 
-const ChatHeader = ({ chat }) => {
+type ChatHeaderProps = {
+  chat: Chat | null;
+};
+
+const ChatHeader: React.FC<ChatHeaderProps> = ({ chat }) => {
   return (
-    <div className="px-6 py-4 border-b border-blue-50 bg-white flex items-center justify-between" style={{fontFamily: 'Roboto, Arial, sans-serif'}}>
+    <div
+      className="px-6 py-4 border-b border-blue-50 bg-white flex items-center justify-between"
+      style={{ fontFamily: "Roboto, Arial, sans-serif" }}
+    >
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
           <span className="font-medium text-blue-600 text-base">

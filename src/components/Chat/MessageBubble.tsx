@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import type { Message } from "../../pages/Dashboard";
 
 const defaultAvatar = (
   <div className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-200 text-blue-700 text-xs font-medium mr-2">
@@ -6,7 +7,12 @@ const defaultAvatar = (
   </div>
 );
 
-const MessageBubble = ({ message, isOwn }) => {
+type MessageBubbleProps = {
+  message: Message;
+  isOwn: boolean;
+};
+
+const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isOwn }) => {
   return (
     <div className={`flex items-end ${isOwn ? 'justify-end' : 'justify-start'} mb-4`} style={{fontFamily: 'Roboto, Arial, sans-serif'}}>
       {/* Show avatar for incoming messages */}
