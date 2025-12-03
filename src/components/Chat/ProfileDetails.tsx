@@ -25,7 +25,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ chat, onClose }) => {
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-100 transition-colors"
+          className="absolute top-2  right-0 p-4 rounded-full hover:bg-gray-100 transition-colors"
           aria-label="Close profile details"
         >
           <XMarkIcon className="w-5 h-5 text-gray-500" />
