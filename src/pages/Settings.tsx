@@ -123,67 +123,11 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
             </div>
           </div>
 
-          {/* Notification Settings */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-              <BellIcon className="w-5 h-5" />
-              Notification Preferences
-            </h2>
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-medium text-gray-800">
-                    Push Notifications
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    Receive notifications for new messages
-                  </p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={settings.notifications}
-                    onChange={(e) =>
-                      handleSettingChange("notifications", e.target.checked)
-                    }
-                    className="sr-only peer"
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                </label>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-medium text-gray-800">Sound Alerts</h3>
-                  <p className="text-sm text-gray-600">
-                    Play sound for new messages
-                  </p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={settings.sound}
-                    onChange={(e) =>
-                      handleSettingChange("sound", e.target.checked)
-                    }
-                    className="sr-only peer"
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                </label>
-              </div>
-            </div>
-          </div>
-
           {/* Logout Section */}
           <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-              <ArrowLeftOnRectangleIcon className="w-5 h-5 text-red-500" />
-              Logout
-            </h2>
+            
             <p className="text-sm text-gray-600 mb-4">
-              Sign out of your account securely. You can log back in at any
-              time.
+              You can log back in at any time.
             </p>
             {/* Logout Action */}
             <div>

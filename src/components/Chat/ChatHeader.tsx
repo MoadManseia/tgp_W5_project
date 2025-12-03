@@ -28,9 +28,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ chat, lastMessage, onHeaderClic
           </p>
         </div>
       </div>
-      <button className="p-2 hover:bg-blue-50 rounded-lg transition-colors">
-        <EllipsisVerticalIcon className="w-5 h-5 text-blue-300" />
-      </button>
+   
     </div>
   );
 };
