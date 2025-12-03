@@ -37,8 +37,8 @@ const ChatList: React.FC<ChatListProps> = ({
                   className="w-10 h-10 rounded-full object-cover"
                 />
               ) : (
-                <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
-                  <ChatBubbleLeftRightIcon className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+                  <ChatBubbleLeftRightIcon className="w-4 h-4 md:w-5 md:h-5 text-white" />
                 </div>
               )}
               <div className="flex-1 min-w-0">

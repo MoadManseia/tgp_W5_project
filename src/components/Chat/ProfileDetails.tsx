@@ -17,7 +17,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ chat }) => {
 
   return (
     <aside
-      className="w-72 border-l border-gray-200 bg-white flex-shrink-0 px-5 py-6 space-y-6"
+      className=" md:hidden lg:block w-72 border-l border-gray-200 bg-white flex-shrink-0 px-5 py-6 space-y-6"
       style={{ fontFamily: "Roboto, Arial, sans-serif" }}
     >
       {/* Profile section */}

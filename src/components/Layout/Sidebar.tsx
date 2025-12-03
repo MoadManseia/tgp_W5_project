@@ -19,9 +19,11 @@ const Sidebar: React.FC<SidebarProps> = ({
   activeChat,
   onSelectChat,
 }) => {
-  const menuItems: { icon: typeof HomeIcon; label: string; view: "dashboard" }[] = [
-    { icon: HomeIcon, label: "Dashboard", view: "dashboard" },
-  ];
+  const menuItems: {
+    icon: typeof HomeIcon;
+    label: string;
+    view: "dashboard";
+  }[] = [{ icon: HomeIcon, label: "Dashboard", view: "dashboard" }];
 
   return (
     <div className="h-full w-16 md:w-64 bg-gray-800 text-white flex flex-col sticky top-0">
@@ -57,16 +59,20 @@ const Sidebar: React.FC<SidebarProps> = ({
           </>
         )}
       </div>
-      
+
       <nav className="flex-1 overflow-y-auto p-4">
         {/* Show Dashboard button only when not on dashboard view */}
         {currentView !== "dashboard" && (
           <ul className="space-y-2">
             {menuItems.map((item) => (
               <li key={item.label}>
-                <button 
+                <button
                   onClick={() => onViewChange(item.view)}
-                  className={`flex items-center gap-3 w-full p-3 rounded-lg transition-colors ${currentView === item.view ? 'bg-blue-600' : 'hover:bg-gray-700'}`}
+                  className={`flex items-center gap-3 w-full p-3 rounded-lg transition-colors ${
+                    currentView === item.view
+                      ? "bg-blue-600"
+                      : "hover:bg-gray-700"
+                  }`}
                 >
                   <item.icon className="w-5 h-5" />
                   <span className="hidden md:inline text-sm">{item.label}</span>
@@ -75,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             ))}
           </ul>
         )}
-        
+
         {/* Chat List - Show when on dashboard view */}
         {currentView === "dashboard" && chats && (
           <div>
@@ -87,7 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
         )}
       </nav>
-      
+
       <div className="p-4 border-t border-gray-700">
         <div className="flex gap-2">
           <button

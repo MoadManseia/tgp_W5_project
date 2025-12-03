@@ -7,7 +7,7 @@ import ProfileDetails from "../components/Chat/ProfileDetails";
 import SettingsPage from "./Settings";
 import type { AppUser } from "../App";
 
-type Chat = {
+export type Chat = {
   id: number;
   name: string;
   lastMessage: string;

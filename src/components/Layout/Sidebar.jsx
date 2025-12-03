@@ -17,7 +17,7 @@ const Sidebar = ({
   const menuItems = [{ icon: HomeIcon, label: "Dashboard", view: "dashboard" }];
 
   return (
-    <div className="hidden md:flex h-full w-16 md:w-64 bg-gray-800 text-white flex-col sticky top-0">
+    <div className="h-full w-16 sm:w-24  md:w-64 bg-gray-800 text-white flex flex-col sticky top-0">
       <div className="p-6 border-b border-gray-700">
         {currentView === "dashboard" ? (
           <>

@@ -12,7 +12,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
     e.preventDefault();
     if (message.trim()) {
       onSendMessage(message);
-      setMessage('');
+      setMessage("");
     }
   };
 
