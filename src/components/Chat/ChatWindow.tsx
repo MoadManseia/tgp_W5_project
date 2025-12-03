@@ -31,7 +31,6 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
                 senderProfilePic={
                   !isOwn && chatUser ? chatUser.profilePic : undefined
                 }
-                senderName={!isOwn && chatUser ? chatUser.name : undefined}
               />
             );
           })}

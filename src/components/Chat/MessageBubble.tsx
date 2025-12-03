@@ -8,10 +8,8 @@ type MessageBubbleProps = {
   senderName?: string;
 };
 
-const defaultAvatar = (initial = "U") => (
-  <div className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-200 text-blue-700 text-xs font-medium mr-2">
-    <span>{initial}</span>
-  </div>
+const defaultAvatar = () => (
+  <div className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-200 mr-2"></div>
 );
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({
@@ -28,19 +26,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       style={{ fontFamily: "Roboto, Arial, sans-serif" }}
     >
       {/* Show avatar for incoming messages */}
-      {!isOwn && (
-        <div className="self-end">
-          {senderProfilePic ? (
-            <img
-              src={senderProfilePic}
-              alt={senderName || "Avatar"}
-              className="w-7 h-7 rounded-full object-cover mr-2"
-            />
-          ) : (
-            defaultAvatar(senderName?.[0] || "U")
-          )}
-        </div>
-      )}
+      {!isOwn && <div className="self-end">{defaultAvatar()}</div>}
       <div>
         {/* INCOMING: timestamp above bubble, OUTGOING: inside bubble */}
         {!isOwn && (

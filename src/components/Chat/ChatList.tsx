@@ -59,11 +59,7 @@ const ChatList: React.FC<ChatListProps> = ({
                   {chat.lastMessage}
                 </p>
               </div>
-              {chat.unread > 0 && (
-                <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full min-w-[20px] text-center">
-                  {chat.unread}
-                </span>
-              )}
+              {/* Notification number for unread messages removed */}
             </div>
           </button>
         ))}
