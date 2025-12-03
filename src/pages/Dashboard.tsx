@@ -18,7 +18,7 @@ export type Chat = {
   email?: string;
 };
 
-type Message = {
+export type Message = {
   id: number;
   content: string;
   senderId: number;
@@ -104,7 +104,7 @@ type DashboardProps = {
 
 const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   const [chats] = useState<Chat[]>(mockChats);
-  const [activeChat, setActiveChat] = useState<Chat>(mockChats[0]);
+  const [activeChat, setActiveChat] = useState<Chat | null>(null);
   const [messages, setMessages] = useState<Message[]>(mockMessages);
   const [currentView, setCurrentView] = useState<"dashboard" | "settings">(
     "dashboard"
@@ -181,12 +181,36 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
         );
       case "dashboard":
       default:
+        if (!activeChat) {
+          // Welcome view shown before a chat is selected
+          return (
+            <div className="flex flex-1 h-full items-center justify-center bg-white">
+              <div className="text-center max-w-md px-4">
+                <p className="text-sm font-medium text-blue-600 mb-2">
+                  Welcome back, {user.name}
+                </p>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+                  Select a conversation to get started
+                </h2>
+                <p className="text-sm text-gray-500">
+                  Choose a chat from the sidebar to view messages and continue
+                  your conversation.
+                </p>
+              </div>
+            </div>
+          );
+        }
+
         return (
           <div className="flex flex-1 h-full">
             {/* Chat Area */}
             <div className="flex flex-col flex-1 h-full">
               <ChatHeader chat={activeChat} />
-              <ChatWindow messages={messages} currentUser={user} />
+              <ChatWindow
+                messages={messages}
+                currentUser={user}
+                chatUser={activeChat}
+              />
               <MessageInput onSendMessage={handleSendMessage} />
             </div>
             {/* Profile Details Sidebar for active chat */}

@@ -4,7 +4,7 @@ import type { Chat } from "../../pages/Dashboard";
 
 type ChatListProps = {
   chats: Chat[];
-  activeChat: Chat;
+  activeChat: Chat | null;
   onSelectChat: (chat: Chat) => void;
 };
 

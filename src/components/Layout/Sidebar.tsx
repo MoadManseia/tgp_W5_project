@@ -8,7 +8,7 @@ type SidebarProps = {
   currentView: "dashboard" | "settings";
   onViewChange: (view: "dashboard" | "settings") => void;
   chats: Chat[];
-  activeChat: Chat;
+  activeChat: Chat | null;
   onSelectChat: (chat: Chat) => void;
 };
 
