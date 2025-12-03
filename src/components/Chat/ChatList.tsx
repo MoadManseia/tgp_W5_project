@@ -25,8 +25,8 @@ const ChatList: React.FC<ChatListProps> = ({
             onClick={() => onSelectChat(chat)}
             className={`w-full p-3 text-left transition-colors rounded-lg ${
               activeChat?.id === chat.id
-                ? 'bg-blue-600 font-semibold text-white'
-                : 'hover:bg-gray-700 text-gray-200'
+                ? "bg-blue-600 font-semibold text-white"
+                : "hover:bg-gray-700 text-gray-200"
             }`}
           >
             <div className="flex items-center gap-3">
@@ -42,8 +42,22 @@ const ChatList: React.FC<ChatListProps> = ({
                 </div>
               )}
               <div className="flex-1 min-w-0">
-                <h3 className={`font-medium text-sm ${activeChat?.id === chat.id ? 'text-white' : 'text-gray-200'}`}>{chat.name}</h3>
-                <p className={`text-xs truncate ${activeChat?.id === chat.id ? 'text-blue-100' : 'text-gray-400'}`}>{chat.lastMessage}</p>
+                <h3
+                  className={`font-medium text-sm ${
+                    activeChat?.id === chat.id ? "text-white" : "text-gray-200"
+                  }`}
+                >
+                  {chat.name}
+                </h3>
+                <p
+                  className={`text-xs truncate ${
+                    activeChat?.id === chat.id
+                      ? "text-blue-100"
+                      : "text-gray-400"
+                  }`}
+                >
+                  {chat.lastMessage}
+                </p>
               </div>
               {chat.unread > 0 && (
                 <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full min-w-[20px] text-center">
