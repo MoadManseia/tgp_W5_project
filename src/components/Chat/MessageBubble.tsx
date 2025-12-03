@@ -8,10 +8,6 @@ type MessageBubbleProps = {
   senderName?: string;
 };
 
-const defaultAvatar = () => (
-  <div className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-200 mr-2"></div>
-);
-
 const MessageBubble: React.FC<MessageBubbleProps> = ({
   message,
   isOwn,
@@ -26,7 +22,6 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       style={{ fontFamily: "Roboto, Arial, sans-serif" }}
     >
       {/* Show avatar for incoming messages */}
-      {!isOwn && <div className="self-end">{defaultAvatar()}</div>}
       <div>
         {/* INCOMING: timestamp above bubble, OUTGOING: inside bubble */}
         {!isOwn && (

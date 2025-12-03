@@ -1,6 +1,5 @@
 import React from "react";
 import { HomeIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
-import { BoltIcon } from "@heroicons/react/24/solid";
 import ChatList from "../Chat/ChatList";
 import type { Chat } from "../../pages/Dashboard";
 
@@ -27,8 +26,6 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className="h-full w-24 md:w-64 bg-gray-800 text-white flex flex-col sticky top-0">
-    
-
       <nav className="flex-1 overflow-y-auto p-4">
         {/* Show Dashboard button only when not on dashboard view */}
         {currentView !== "dashboard" && (

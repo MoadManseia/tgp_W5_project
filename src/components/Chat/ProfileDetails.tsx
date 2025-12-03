@@ -12,7 +12,6 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ chat, onClose }) => {
 
   // Mocked details for now – in a real app these would come from your backend
   const lastActiveMinutes = chat.lastActiveMinutes ?? 12;
-  const phone = chat.phone ?? "+1 (555) 123-4567";
   const email =
     chat.email ??
     `${chat.name?.toLowerCase().replace(/\s+/g, ".")}@example.com`;
@@ -32,7 +31,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ chat, onClose }) => {
           <XMarkIcon className="w-5 h-5 text-gray-500" />
         </button>
       )}
-      
+
       {/* Profile section */}
       <section className="grid grid-rows-2 gap-3">
         <div className="flex items-center gap-3 row-span-2">
@@ -76,10 +75,6 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({ chat, onClose }) => {
           Contact Information
         </h4>
         <div className="grid grid-rows-2 gap-2 text-sm">
-          <div className="flex flex-col">
-            <span className="text-xs text-gray-500">Phone</span>
-            <span className="text-gray-800">{phone}</span>
-          </div>
           <div className="flex flex-col">
             <span className="text-xs text-gray-500">Email</span>
             <span className="text-gray-800 break-all">{email}</span>
